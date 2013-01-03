@@ -34,6 +34,8 @@
 		3DA049A71694458C00C934F3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DA049A51694458C00C934F3 /* MainStoryboard.storyboard */; };
 		3DA049AE1694470200C934F3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA049AD1694470200C934F3 /* Default.png */; };
 		3DA049B01694470800C934F3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA049AF1694470800C934F3 /* Default@2x.png */; };
+		3DFA37601695E2C900028D61 /* paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFA375E1695E2C900028D61 /* paper.png */; };
+		3DFA37611695E2C900028D61 /* paper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFA375F1695E2C900028D61 /* paper@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		3DA049A61694458C00C934F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		3DA049AD1694470200C934F3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		3DA049AF1694470800C934F3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		3DFA375E1695E2C900028D61 /* paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paper.png; sourceTree = "<group>"; };
+		3DFA375F1695E2C900028D61 /* paper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paper@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,8 @@
 		3DA0498B1694458C00C934F3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3DFA375E1695E2C900028D61 /* paper.png */,
+				3DFA375F1695E2C900028D61 /* paper@2x.png */,
 				3D5BB0B6169590A100418A1D /* mapa.png */,
 				3D5BB0B7169590A100418A1D /* mapa@2x.png */,
 				3D5BB0B2169579E800418A1D /* whole_book_opened.png */,
@@ -229,6 +235,8 @@
 				3D5BB0B5169579E800418A1D /* whole_book_opened@2x.png in Resources */,
 				3D5BB0B8169590A100418A1D /* mapa.png in Resources */,
 				3D5BB0B9169590A100418A1D /* mapa@2x.png in Resources */,
+				3DFA37601695E2C900028D61 /* paper.png in Resources */,
+				3DFA37611695E2C900028D61 /* paper@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

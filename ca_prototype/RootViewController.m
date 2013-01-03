@@ -42,11 +42,9 @@
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
 
     self.pageViewController.dataSource = self.modelController;
+    
 
-    [self addChildViewController:self.pageViewController];
-
-    //[self.view addSubview:self.pageViewController.view];
-
+    //
     // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
     CGRect pageViewRect = self.view.bounds;
     self.pageViewController.view.frame = pageViewRect;
@@ -81,6 +79,10 @@
     [self openBookFirstPart];
     [self performSelector:@selector(openBookSecondPart) withObject:nil afterDelay:0.8 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
     [self performSelector:@selector(finishBookOpening) withObject:nil afterDelay:1.6 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+    [self performSelector:@selector(activatePageViewController) withObject:nil afterDelay:2.6 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+    
+    
+    
 }
 -(void)openBookFirstPart{
     [UIView beginAnimations:nil context:nil];
@@ -126,14 +128,23 @@
         
        
     } completion:^(BOOL finished) {
+
+        
         [UIView animateWithDuration:2 animations:^{
             self.mapImage.frame = CGRectMake(self.backgroudImage.frame.size.width-(self.mapImage.frame.size.width)-10,self.backgroudImage.frame.size.height-(self.mapImage.frame.size.height)-20,self.mapImage.frame.size.width,self.mapImage.frame.size.height);
         }];
+        
     }];
     
 }
+-(void)activatePageViewController{
+    //prida se strankovaci viewcontroller
+    self.pageViewController.view.frame = CGRectMake(self.rightPageOpened.frame.origin.x, self.rightPageOpened.frame.origin.y+5, self.rightPageOpened.frame.size.width-10, self.rightPageOpened.frame.size.height-11);
+    [self.view insertSubview:self.pageViewController.view belowSubview:self.mapImage];
+    //[self.view addSubview:self.pageViewController.view];
 
- 
+}
+
 
 - (void)didReceiveMemoryWarning
 {
