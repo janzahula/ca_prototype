@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface RootViewController : UIViewController <UIPageViewControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroudImage;
+@property (weak, nonatomic) IBOutlet UIImageView *noTextBackgroundImage;
+@property (weak, nonatomic) IBOutlet UIImageView *bookImage;
+@property (weak, nonatomic) IBOutlet UIImageView *mapImage;
+@property (weak, nonatomic) IBOutlet UIImageView *rightPageOpened;
+@property (weak, nonatomic) IBOutlet UIImageView *wholeOpenedBookImage;
 
 @end
