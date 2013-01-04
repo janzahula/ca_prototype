@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "DataViewController.h"
 
-@interface RootViewController : UIViewController <UIPageViewControllerDelegate>
+
+
+@interface RootViewController : UIViewController <UIPageViewControllerDelegate, PageViewControllerDelegate>
+
+
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroudImage;

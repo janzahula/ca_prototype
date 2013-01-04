@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -31,5 +32,10 @@
     [super viewWillAppear:animated];
     self.dataLabel.text = [self.dataObject description];
 }
+
+- (IBAction)playButtonTapped:(id)sender {
+    [self.delegate zoomAndRotateView];
+}
+
 
 @end

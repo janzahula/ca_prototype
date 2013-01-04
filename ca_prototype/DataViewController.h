@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+ 
 
-@interface DataViewController : UIViewController
+@protocol PageViewControllerDelegate
+-(void)zoomAndRotateView;
+
+@end
+
+@interface DataViewController : UIViewController  
+
+@property (weak, nonatomic) id <PageViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UILabel *dataLabel;
 @property (strong, nonatomic) id dataObject;
+- (IBAction)playButtonTapped:(id)sender;
 
 @end
