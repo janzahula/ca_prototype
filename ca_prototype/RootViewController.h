@@ -23,5 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *mapImage;
 @property (weak, nonatomic) IBOutlet UIImageView *rightPageOpened;
 @property (weak, nonatomic) IBOutlet UIImageView *wholeOpenedBookImage;
+@property (weak, nonatomic) IBOutlet UIImageView *lightImage;
 
 @end

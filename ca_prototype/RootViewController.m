@@ -135,16 +135,17 @@
          
          self.noTextBackgroundImage.alpha = 0;
         //1.7 je presne na celou obrazovku
-      self.view.transform = CGAffineTransformMakeScale(1.65, 1.65);
+       self.view.transform = CGAffineTransformMakeScale(1.65, 1.65);
        
     } completion:^(BOOL finished) {
-         
+        self.noTextBackgroundImage = nil;
     }];
     
 }
 -(void)activatePageViewController{
     //prida se strankovaci viewcontroller
-    self.pageViewController.view.frame = CGRectMake(self.rightPageOpened.frame.origin.x+1, self.rightPageOpened.frame.origin.y+5, self.bookImage.frame.size.width-8, self.bookImage.frame.size.height-12);
+   // self.pageViewController.view.frame = CGRectMake(self.rightPageOpened.frame.origin.x+1, self.rightPageOpened.frame.origin.y+5, self.bookImage.frame.size.width-8, self.bookImage.frame.size.height-12);
+    
      [self.view insertSubview:self.pageViewController.view belowSubview:self.mapImage];
 }
 
@@ -152,7 +153,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSLog(@"did recieve mem warninh");
 }
 
 - (ModelController *)modelController
@@ -188,15 +189,16 @@
 
 -(void)zoomAndRotateView{
    // self.pageViewController.view.hidden = YES;
-    self.rightPageOpened.hidden = YES;
-    CGRect originFrame = self.wholeOpenedBookImage.frame;
-    self.bookImage.hidden = YES;
-    self.wholeOpenedBookImage.frame = originFrame;
+    self.rightPageOpened = nil;
+    self.bookImage = nil;
     [UIView animateWithDuration:2 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
-        self.wholeOpenedBookImage.frame =originFrame;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:2.0 delay:0 options:UIViewAnimationCurveEaseInOut animations:^{
-            self.view.transform = CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2),2.5, 2.5);
+            [UIView animateWithDuration:3.0 delay:0 options:UIViewAnimationCurveEaseInOut animations:^{
+                double scale = 1.6;
+                self.pageViewController.view.transform = CGAffineTransformRotate(CGAffineTransformMakeScale(scale, scale), M_PI_2);
+                self.wholeOpenedBookImage.transform = CGAffineTransformRotate(CGAffineTransformMakeScale(scale, scale), M_PI_2);
+                self.mapImage.transform = CGAffineTransformMakeTranslation(500, 500);
+          //  
         } completion:^(BOOL finished) {
         }];
     }];
