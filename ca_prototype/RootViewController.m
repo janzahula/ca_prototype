@@ -9,7 +9,7 @@
 #import "RootViewController.h"
 
 #import "ModelController.h"
-
+#import "MapView.h"
 #import "DataViewController.h"
 
 @interface RootViewController ()
@@ -28,10 +28,17 @@
     self.bookImage.layer.shadowOpacity = 0.8;
     self.bookImage.layer.shadowRadius = 2;
     self.bookImage.layer.masksToBounds = NO;
-   // self.mapImage.transform = CGAffineTransformMakeRotation(-1.38+M_PI_2);
-
-       self.rightPageOpened.bounds = self.bookImage.bounds;
-	// Do any additional setup after loading the view, typically from a nib.
+    self.rightPageOpened.image = [UIImage imageNamed:@"right_page_opened.png"];
+    self.mapImage.layer.shadowColor = [[UIColor blackColor]CGColor];
+    self.mapImage.layer.shadowOffset = CGSizeMake(2, 2);
+    self.mapImage.layer.shadowOpacity = 0.9;
+    self.mapImage.layer.shadowRadius = 4;
+    self.mapImage.layer.masksToBounds = NO;
+    
+    
+ 
+    
+    	// Do any additional setup after loading the view, typically from a nib.
     // Configure the page view controller and add it as a child view controller.
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     self.pageViewController.delegate = self;
@@ -61,6 +68,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     //kniha se otevira, mizi napisy
     
+    //posunu si stred desek na hrbet, kvuli otevreni desek
     self.bookImage.center = CGPointMake((self.bookImage.center.x - self.bookImage.bounds.size.width/2.0f), self.bookImage.center.y);
     
     [self openBook];
@@ -76,14 +84,13 @@
 -(void)openBook{
     
     [UIView animateWithDuration:2 animations:^{
-        self.mapImage.frame = CGRectMake(self.backgroudImage.frame.size.width-(self.mapImage.frame.size.width)-10,self.backgroudImage.frame.size.height-(self.mapImage.frame.size.height)-20,self.mapImage.frame.size.width,self.mapImage.frame.size.height);
+        self.mapImage.transform = CGAffineTransformMakeTranslation(120, 220);
     }];
     self.bookImage.layer.anchorPoint=CGPointMake(0, .5);
     [self openBookFirstPart];
     [self performSelector:@selector(openBookSecondPart) withObject:nil afterDelay:0.8 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
     [self performSelector:@selector(finishBookOpening) withObject:nil afterDelay:1.6 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-    [self performSelector:@selector(activatePageViewController) withObject:nil afterDelay:2.6 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-    
+    [self performSelector:@selector(activatePageViewController) withObject:nil afterDelay:2.2 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
     
     
 }
@@ -124,27 +131,21 @@
     
 }
 -(void)zoomOpenedBook{
-    
-            [UIView animateWithDuration:2.0 delay:0 options:UIViewAnimationCurveEaseInOut animations:^{
-        self.noTextBackgroundImage.alpha = 1.0;
-         //1.7 je presne na celou obrazovku
-        self.view.transform = CGAffineTransformMakeScale(1.65, 1.65);
-        
+     [UIView animateWithDuration:2.0 delay:0 options:UIViewAnimationCurveEaseInOut animations:^{
+         
+         self.noTextBackgroundImage.alpha = 0;
+        //1.7 je presne na celou obrazovku
+      self.view.transform = CGAffineTransformMakeScale(1.65, 1.65);
        
     } completion:^(BOOL finished) {
-
-        
-        
-        
+         
     }];
     
 }
 -(void)activatePageViewController{
     //prida se strankovaci viewcontroller
-    self.pageViewController.view.frame = CGRectMake(self.rightPageOpened.frame.origin.x, self.rightPageOpened.frame.origin.y+5, self.rightPageOpened.frame.size.width-10, self.rightPageOpened.frame.size.height-11);
-    [self.view insertSubview:self.pageViewController.view belowSubview:self.mapImage];
-    //[self.view addSubview:self.pageViewController.view];
-
+    self.pageViewController.view.frame = CGRectMake(self.rightPageOpened.frame.origin.x+1, self.rightPageOpened.frame.origin.y+5, self.bookImage.frame.size.width-8, self.bookImage.frame.size.height-12);
+     [self.view insertSubview:self.pageViewController.view belowSubview:self.mapImage];
 }
 
 
@@ -186,27 +187,19 @@
 #pragma mark DataViewControllerDelegate
 
 -(void)zoomAndRotateView{
-    self.pageViewController.view.hidden = YES;
-    self.wholeOpenedBookImage.center = CGPointMake((self.wholeOpenedBookImage.center.x/3)*8, self.wholeOpenedBookImage.center.y);
-self.wholeOpenedBookImage.layer.anchorPoint = CGPointMake(0.75, 0.5);
+   // self.pageViewController.view.hidden = YES;
+    self.rightPageOpened.hidden = YES;
+    CGRect originFrame = self.wholeOpenedBookImage.frame;
+    self.bookImage.hidden = YES;
+    self.wholeOpenedBookImage.frame = originFrame;
     [UIView animateWithDuration:2 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
-        self.wholeOpenedBookImage.transform = CGAffineTransformMakeScale(0.6, 0.6);
-   
+        self.wholeOpenedBookImage.frame =originFrame;
     } completion:^(BOOL finished) {
-        
         [UIView animateWithDuration:2.0 delay:0 options:UIViewAnimationCurveEaseInOut animations:^{
-            
-            
-                        self.wholeOpenedBookImage.transform = CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2),1.5, 1.5);
-            
+            self.view.transform = CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2),2.5, 2.5);
         } completion:^(BOOL finished) {
-            TRC_POINT(self.wholeOpenedBookImage.center);
-            
-            TRC_RECT(self.wholeOpenedBookImage.frame);
-            [self.wholeOpenedBookImage setNeedsDisplay];
         }];
     }];
-    
 }
 
 @end
